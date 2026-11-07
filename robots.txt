@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://v1r-3ph0s.github.io/sitemap.xml

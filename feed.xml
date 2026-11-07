@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>CyberVault</title>
+    <link>https://v1r-3ph0s.github.io/</link>
+    <description>Cybersecurity blog covering penetration testing, DFIR, malware analysis, reverse engineering, and threat intelligence by v!R_3pH0$ from Sri Lanka.</description>
+    <language>en</language>
+    <managingEditor>vir_3ph0s@proton.me (v!R_3pH0$)</managingEditor>
+    <webMaster>vir_3ph0s@proton.me (v!R_3pH0$)</webMaster>
+    <lastBuildDate>Thu, 05 Nov 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://v1r-3ph0s.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://v1r-3ph0s.github.io/assets/img/avatar.svg</url>
+      <title>CyberVault</title>
+      <link>https://v1r-3ph0s.github.io/</link>
+    </image>
+
+    <item>
+      <title>Zero-Auth to Root: Weaponizing Embedded CGI Command Injection into Telnet Auth Bypass</title>
+      <link>https://v1r-3ph0s.github.io/posts/zero-auth-to-root-weaponizing-embedded-cgi-command-injection-into-telnet-auth-bypass.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/zero-auth-to-root-weaponizing-embedded-cgi-command-injection-into-telnet-auth-bypass.html</guid>
+      <description>A hands-on walkthrough demonstrating how I discovered an unauthenticated command injection in an embedded IOT Device web management interface, chained shell commands to bypass execution filters, and hijacked the device&apos;s Telnet service without a password.</description>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate>
+      <category>Penetration Testing</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>Operation SILVER_SPECTRE Unveiled: Diamond Model Profiling &amp; Threat Infrastructure Pivoting</title>
+      <link>https://v1r-3ph0s.github.io/posts/operation-silver-spectre-unveiled-diamond-model-profiling-threat-infrastructure-pivoting.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/operation-silver-spectre-unveiled-diamond-model-profiling-threat-infrastructure-pivoting.html</guid>
+      <description>Profiling an Advanced Persistent Threat (APT) group using the Diamond Model, MITRE ATT&amp;CK mapping, infrastructure pivoting via passive DNS and JARM TLS fingerprinting, and Sigma detection engineering.</description>
+      <pubDate>Thu, 22 Jan 2026 00:00:00 +0000</pubDate>
+      <category>Threat Intelligence</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>Dissecting the &apos;dark_node&apos; Implant: Reverse Engineering Stripped ELF C2 Wire Protocols with Ghidra</title>
+      <link>https://v1r-3ph0s.github.io/posts/dissecting-the-dark-node-implant-reverse-engineering-stripped-elf-c2-wire-protocols-with-ghidra.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/dissecting-the-dark-node-implant-reverse-engineering-stripped-elf-c2-wire-protocols-with-ghidra.html</guid>
+      <description>Deep-dive reverse engineering of a stripped ELF adversary C2 implant. Reconstructing custom binary communication protocols, command dispatch tables, and developing an offline protocol emulator.</description>
+      <pubDate>Thu, 15 May 2025 00:00:00 +0000</pubDate>
+      <category>Reverse Engineering</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>Inside an Evasive Loader: From PE Entropy &amp; Anti-Debugging to Manual Unpacking &amp; YARA</title>
+      <link>https://v1r-3ph0s.github.io/posts/inside-an-evasive-loader-from-pe-entropy-anti-debugging-to-manual-unpacking-yara.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/inside-an-evasive-loader-from-pe-entropy-anti-debugging-to-manual-unpacking-yara.html</guid>
+      <description>Unpacking and analyzing a real-world multi-stage loader. From PE header triage and anti-analysis evasion bypasses to manual payload extraction and writing YARA detection rules.</description>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      <category>Malware Analysis</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>Zero Disk Footprint: Unmasking In-Memory Malware &amp; Process Hollowing with Volatility 3</title>
+      <link>https://v1r-3ph0s.github.io/posts/zero-disk-footprint-unmasking-in-memory-malware-process-hollowing-with-volatility-3.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/zero-disk-footprint-unmasking-in-memory-malware-process-hollowing-with-volatility-3.html</guid>
+      <description>A step-by-step incident response investigation dissecting memory dumps using Volatility 3, hunting process injection (process hollowing / reflective DLL), and building a timeline of compromise.</description>
+      <pubDate>Wed, 18 Dec 2024 00:00:00 +0000</pubDate>
+      <category>Digital Forensics</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>The WAF Evasion Playbook: From Fingerprinting to Request Smuggling &amp; Polyglot Bypasses</title>
+      <link>https://v1r-3ph0s.github.io/posts/the-waf-evasion-playbook-from-fingerprinting-to-request-smuggling-polyglot-bypasses.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/the-waf-evasion-playbook-from-fingerprinting-to-request-smuggling-polyglot-bypasses.html</guid>
+      <description>Explore the cat-and-mouse game between attackers and Web Application Firewalls. Learn encoding tricks, HTTP request smuggling, header manipulation, and polyglot payloads that slip past commercial WAF solutions.</description>
+      <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
+      <category>Web Security</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>The Root Hunter&apos;s Field Manual: Chaining SUID, Sudo &amp; Kernel Misconfigurations in Linux</title>
+      <link>https://v1r-3ph0s.github.io/posts/the-root-hunters-field-manual-chaining-suid-sudo-kernel-misconfigurations-in-linux.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/the-root-hunters-field-manual-chaining-suid-sudo-kernel-misconfigurations-in-linux.html</guid>
+      <description>Master the art of Linux privilege escalation. Covering SUID/SGID abuse, sudo misconfigurations, cron job exploitation, writable paths, kernel exploits and more — with practical commands and real-world examples.</description>
+      <pubDate>Sun, 10 Mar 2024 00:00:00 +0000</pubDate>
+      <category>Linux Security</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>Dissecting Modern SQLi: From Union &amp; Error Extraction to Blind Out-of-Band Exfiltration</title>
+      <link>https://v1r-3ph0s.github.io/posts/dissecting-modern-sqli-from-union-error-extraction-to-blind-out-of-band-exfiltration.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/dissecting-modern-sqli-from-union-error-extraction-to-blind-out-of-band-exfiltration.html</guid>
+      <description>An in-depth exploration of SQL injection vulnerabilities — from classic union-based attacks to blind time-based extraction. Includes real payloads, detection bypasses, and hardening your applications against SQLi.</description>
+      <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
+      <category>Web Security</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+    <item>
+      <title>The Ethical Hacker&apos;s Blueprint: Scoping, RoE Frameworks &amp; 5-Phase Penetration Testing</title>
+      <link>https://v1r-3ph0s.github.io/posts/the-ethical-hackers-blueprint-scoping-roe-frameworks-5-phase-penetration-testing.html</link>
+      <guid isPermaLink="true">https://v1r-3ph0s.github.io/posts/the-ethical-hackers-blueprint-scoping-roe-frameworks-5-phase-penetration-testing.html</guid>
+      <description>Learn the fundamentals of penetration testing, from reconnaissance to reporting. This comprehensive guide covers the essential phases of an ethical hacking engagement and the mindset required to succeed.</description>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <category>Penetration Testing</category>
+      <dc:creator>v!R_3pH0$</dc:creator>
+    </item>
+
+  </channel>
+</rss>
