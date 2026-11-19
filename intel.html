@@ -1,1 +1,646 @@
-<!doctype html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Threat Intelligence Feed — CyberVault | Live Cyber News &amp; CVE Alerts</title><meta name="description" content="Live threat intelligence feed aggregating cybersecurity news, vulnerability alerts, ransomware activity, and APT reports. Updated regularly from trusted sources."><meta name="keywords" content="threat intelligence, cyber feed, CVE alerts, ransomware, APT, CISA KEV, cybersecurity news, vulnerability intelligence"><meta name="author" content="v!R_3pH0$"><meta name="robots" content="index, follow"><link rel="canonical" href="https://v1r-3ph0s.github.io/intel.html"><meta property="og:type" content="website"><meta property="og:site_name" content="CyberVault"><meta property="og:title" content="Threat Intelligence Feed — CyberVault"><meta property="og:description" content="Live threat intelligence feed: cybersecurity news, CVE alerts, ransomware, and APT activity."><meta property="og:url" content="https://v1r-3ph0s.github.io/intel.html"><meta property="og:image" content="https://v1r-3ph0s.github.io/assets/img/avatar.svg"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@54N92N"><meta name="twitter:title" content="Threat Intelligence Feed — CyberVault"><meta name="twitter:description" content="Live threat intelligence feed: cybersecurity news, CVE alerts, ransomware, and APT activity."><meta name="twitter:image" content="https://v1r-3ph0s.github.io/assets/img/avatar.svg"><link rel="alternate" type="application/rss+xml" title="CyberVault RSS Feed" href="https://v1r-3ph0s.github.io/feed.xml"><link rel="icon" type="image/svg+xml" href="assets/img/avatar.svg"><link rel="stylesheet" href="assets/css/main.css"><link rel="stylesheet" href="assets/css/syntax.css"><link rel="stylesheet" href="assets/css/responsive.css"><script src="__loader.js"></script><style>.intel-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}.intel-live{display:inline-flex;align-items:center;gap:.4rem;font-size:.75rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);background:var(--accent-glow);border:1px solid rgba(0,255,136,.25);padding:.25rem .65rem;border-radius:99px}.intel-live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent);animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}.intel-meta{font-size:.8rem;color:var(--text-muted);font-family:var(--font-mono)}.intel-controls{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.25rem;align-items:center}.intel-search{flex:1;min-width:180px;position:relative}.intel-search input{width:100%;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:var(--font-sans);font-size:.875rem;padding:.5rem .75rem .5rem 2.1rem;outline:0;transition:border-color var(--transition)}.intel-search input:focus{border-color:var(--accent)}.intel-search input::placeholder{color:var(--text-muted)}.intel-search .search-ico{position:absolute;left:.65rem;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.9rem;pointer-events:none}.intel-select{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:var(--font-sans);font-size:.85rem;padding:.5rem .7rem;outline:0;cursor:pointer}.intel-select:focus{border-color:var(--accent)}.sev-pills{display:flex;flex-wrap:wrap;gap:.4rem}.sev-pill{font-size:.7rem;font-weight:600;letter-spacing:.3px;text-transform:uppercase;padding:.25rem .55rem;border-radius:99px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-secondary);cursor:pointer;transition:all var(--transition);user-select:none}.sev-pill:hover{border-color:var(--text-muted)}.sev-pill.active{border-color:var(--accent);background:var(--accent-glow);color:var(--accent)}.sev-pill[data-sev=critical].active{border-color:var(--danger);background:rgba(255,77,77,.12);color:var(--danger)}.sev-pill[data-sev=high].active{border-color:var(--warning);background:rgba(227,179,65,.12);color:var(--warning)}.sev-pill[data-sev=medium].active{border-color:#58a6ff;background:rgba(88,166,255,.12);color:#58a6ff}.intel-list{display:flex;flex-direction:column;gap:.75rem}.intel-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.15rem;transition:border-color var(--transition),box-shadow var(--transition);cursor:pointer}.intel-card:hover{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent-glow)}.intel-card-header{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .75rem;margin-bottom:.45rem}.intel-source{font-size:.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}.intel-date{font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)}.intel-badge{font-size:.65rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:.15rem .45rem;border-radius:4px}.intel-badge.critical{background:rgba(255,77,77,.15);color:var(--danger);border:1px solid rgba(255,77,77,.3)}.intel-badge.high{background:rgba(227,179,65,.15);color:var(--warning);border:1px solid rgba(227,179,65,.3)}.intel-badge.medium{background:rgba(88,166,255,.12);color:#58a6ff;border:1px solid rgba(88,166,255,.3)}.intel-badge.new{background:var(--accent-glow);color:var(--accent);border:1px solid rgba(0,255,136,.3)}.intel-badge.cve{background:rgba(192,132,252,.12);color:#c084fc;border:1px solid rgba(192,132,252,.3);font-family:var(--font-mono)}.intel-title{font-size:.95rem;font-weight:600;color:var(--text-primary);line-height:1.45;margin-bottom:.5rem}.intel-card:hover .intel-title{color:var(--accent)}.intel-open{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;color:var(--link);font-weight:500}.intel-open:hover{color:var(--link-hover)}.intel-empty{text-align:center;padding:3rem 1rem;color:var(--text-muted);font-size:.9rem;display:none}.intel-count{font-size:.8rem;color:var(--text-muted);margin-bottom:.75rem}.date-group{display:flex;align-items:center;gap:.75rem;margin:1.25rem 0 .5rem}.date-group:first-child{margin-top:0}.date-label{font-size:.7rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);white-space:nowrap}.date-line{flex:1;height:1px;background:var(--border)}.source-list{display:flex;flex-direction:column;gap:.35rem}.source-item{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.82rem;color:var(--text-secondary);padding:.3rem 0;border-bottom:1px solid var(--border-muted)}.source-item:last-child{border-bottom:none}.source-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.source-count{font-size:.72rem;font-family:var(--font-mono);color:var(--text-muted);background:var(--bg-tertiary);padding:.1rem .4rem;border-radius:4px;flex-shrink:0}.source-item a{color:var(--link)}.source-item a:hover{color:var(--link-hover)}@media (max-width:768px){.intel-controls{flex-direction:column;align-items:stretch}.intel-search{min-width:100%}}</style></head><body class="intel-page"><a href="#main-content" class="skip-link">Skip to content</a><div id="app"><div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><div class="profile" id="sidebarProfile"></div><div class="sidebar-divider"></div><nav class="sidebar-nav" id="sidebarNav"></nav><div class="sidebar-divider"></div><div class="sidebar-stats" id="sidebarStats"></div><div class="sidebar-divider"></div><div class="social-links" id="sidebarSocial"></div></div></aside><div class="main-wrapper"><header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar" aria-expanded="false">&#9776;</button> <span class="topbar-brand" id="topbarBrand"></span><div class="search-wrap" role="search"><div class="search-input-wrap"><span class="search-icon">&#128269;</span> <input type="search" id="searchInput" placeholder="Search posts… (press /)" autocomplete="off" aria-label="Search posts"></div><div class="search-results" id="searchResults" role="listbox"></div></div><div class="topbar-actions"><button class="theme-toggle" id="themeToggle">&#9728;</button></div></header><main class="content-wrapper" id="main-content"><div class="content-main"><div class="section-header"><h2 class="section-title"><span class="title-accent">//</span> Threat Intel Feed</h2><p class="section-subtitle">Aggregated cybersecurity news, vulnerability alerts &amp; threat reports</p></div><div class="intel-header"><div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap"><span class="intel-live" id="intelLiveBadge">Live</span> <span class="intel-meta" id="intelUpdated">Loading feeds…</span></div><div style="display:flex;align-items:center;gap:.75rem"><span class="intel-count" id="intelCount">—</span> <button type="button" class="intel-select" id="intelRefresh" style="cursor:pointer;padding:.4rem .7rem" title="Refresh feeds">↻ Refresh</button></div></div><div id="intelStatus" style="font-size:.78rem;color:var(--text-muted);margin-bottom:.75rem;min-height:1.2em"></div><div class="intel-controls"><div class="intel-search"><span class="search-ico">&#128269;</span> <input type="search" id="intelQ" placeholder="Filter by keyword, CVE, source…" autocomplete="off" aria-label="Filter intel items"></div><select class="intel-select" id="intelSrc" aria-label="Filter by source"><option value="">All sources</option></select><div class="sev-pills" id="sevPills"><span class="sev-pill" data-sev="critical">Critical</span> <span class="sev-pill" data-sev="high">High</span> <span class="sev-pill" data-sev="medium">Medium</span> <span class="sev-pill" data-sev="new">New</span></div></div><div class="intel-list" id="intelList"></div><div class="intel-empty" id="intelEmpty">No items match your filters.</div></div><aside class="content-aside"><div class="widget"><div class="widget-title">📡 Sources</div><p style="font-size:.78rem;color:var(--text-muted);margin-bottom:.75rem;line-height:1.5">Articles are aggregated from these public cybersecurity news outlets.</p><div class="source-list" id="intelSources"></div></div><div class="widget"><div class="widget-title">&#128337; Recent Posts</div><div id="recentPostsWidget"></div></div><div class="widget"><div class="widget-title">⬡ Quick Links</div><div style="display:flex;flex-direction:column;gap:.5rem"><a href="index.html" class="read-more">&#8594; All Posts</a> <a href="categories.html" class="read-more">&#8594; Categories</a> <a href="tags.html" class="read-more">&#8594; Tags</a> <a href="archives.html" class="read-more">&#8594; Archives</a></div></div></aside></main><footer class="site-footer" id="siteFooter"></footer></div></div><button class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</button><script>!function(){const e=[{name:"BleepingComputer",home:"https://www.bleepingcomputer.com/",rss:"https://www.bleepingcomputer.com/feed/"},{name:"The Hacker News",home:"https://thehackernews.com/",rss:"https://feeds.feedburner.com/TheHackersNews"},{name:"SecurityWeek",home:"https://www.securityweek.com/",rss:"https://www.securityweek.com/feed/"},{name:"Security Affairs",home:"https://securityaffairs.com/",rss:"https://securityaffairs.com/feed"},{name:"GBHackers",home:"https://gbhackers.com/",rss:"https://gbhackers.com/feed/"},{name:"Cyber Security News",home:"https://cybersecuritynews.com/",rss:"https://cybersecuritynews.com/feed/"},{name:"Dark Reading",home:"https://www.darkreading.com/",rss:"https://www.darkreading.com/rss.xml"},{name:"Krebs on Security",home:"https://krebsonsecurity.com/",rss:"https://krebsonsecurity.com/feed/"},{name:"CISA Advisories",home:"https://www.cisa.gov/",rss:"https://www.cisa.gov/cybersecurity-advisories/all.xml"},{name:"SANS ISC",home:"https://isc.sans.edu/",rss:"https://isc.sans.edu/rssfeed_full.xml"},{name:"Unit 42",home:"https://unit42.paloaltonetworks.com/",rss:"https://unit42.paloaltonetworks.com/feed/"},{name:"Microsoft Security",home:"https://www.microsoft.com/en-us/security/blog/",rss:"https://www.microsoft.com/en-us/security/blog/feed/"}],t="cv_intel_corsdev_v1";let n=[],r={};const s=document.getElementById("intelList"),o=document.getElementById("intelEmpty"),a=document.getElementById("intelCount"),i=document.getElementById("intelQ"),c=document.getElementById("intelSrc"),l=document.querySelectorAll(".sev-pill"),u=document.getElementById("intelUpdated"),m=document.getElementById("intelStatus"),d=document.getElementById("intelRefresh"),h=document.getElementById("intelSources");function p(e){return new Promise((t=>setTimeout(t,e)))}function w(e){try{return Date.now()-new Date(e).getTime()<1296e5}catch(e){return!1}}function g(e){const t=(e||"").match(/CVE-\d{4}-\d{4,7}/i);return t?t[0].toUpperCase():""}function f(e){const t=(e||"").toLowerCase();return/\bcritical\b|zero-?day|0-day|rce\b|remote code execution|actively exploited|\bkev\b/.test(t)?"critical":/\bhigh\b|ransomware|worm|wiper/.test(t)?"high":/\bmedium\b|moderate\b/.test(t)?"medium":""}function y(e){return e?(e.textContent||"").replace(/\s+/g," ").trim():""}function v(e,t){const n=(e.title||"").replace(/\s+/g," ").trim(),r=(e.url||e.link||e.guid||e.id||"").trim();if(!n||!r)return null;let s=new Date(e.date_published||e.pubDate||e.published||e.date||Date.now());isNaN(s.getTime())&&(s=new Date);const o=n+" "+(e.summary||e.description||e.content_html||"");return{title:n,source:t,date:s.toISOString(),link:r,sev:f(o),cve:g(o)}}async function k(e){const t="https://proxy.cors.dev/"+e.rss,n=new AbortController,r=setTimeout((()=>n.abort()),25e3);try{const s=await fetch(t,{signal:n.signal,headers:{Accept:"application/rss+xml, application/atom+xml, application/xml, text/xml, */*"}});if(clearTimeout(r),!s.ok)throw new Error("cors.dev HTTP "+s.status);const o=await s.text();if(!o||o.length<50)throw new Error("empty response");return function(e,t){const n=[],r=(new DOMParser).parseFromString(e,"application/xml");if(r.querySelector("parsererror"))throw new Error("XML parse error");let s=r.querySelectorAll("item");return s.length||(s=r.querySelectorAll("entry")),s.forEach((e=>{if(n.length>=12)return;const r=y(e.querySelector("title"));if(!r)return;let s="";const o=e.querySelector("link");if(o&&(s=o.getAttribute("href")||y(o)),!s){const t=e.querySelector("guid");if(t){const e=y(t);e.startsWith("http")&&(s=e)}}if(!s)return;const a=y(e.querySelector("pubDate"))||y(e.querySelector("published"))||y(e.querySelector("updated"))||"";let i=a?new Date(a):new Date;isNaN(i.getTime())&&(i=new Date);const c=r+" "+(y(e.querySelector("description"))||y(e.querySelector("summary"))||y(e.querySelector("content"))||"");n.push({title:r,source:t,date:i.toISOString(),link:s.trim(),sev:f(c),cve:g(c)})})),n}(o,e.name)}catch(e){throw clearTimeout(r),e}}async function b(e){const t=[];try{const t=await k(e);return r[e.name]={ok:!0,count:t.length,error:null,via:"cors.dev"},t}catch(e){t.push("cors.dev: "+(e.message||e))}try{await p(300);const n=await async function(e){const t="https://feed2json.org/convert?url="+encodeURIComponent(e.rss),n=new AbortController,r=setTimeout((()=>n.abort()),2e4);try{const s=await fetch(t,{signal:n.signal});if(clearTimeout(r),!s.ok)throw new Error("feed2json HTTP "+s.status);return((await s.json()).items||[]).map((t=>v(t,e.name))).filter(Boolean).slice(0,12)}catch(e){throw clearTimeout(r),e}}(e);if(n.length)return r[e.name]={ok:!0,count:n.length,error:null,via:"feed2json"},n;t.push("feed2json: 0 items")}catch(e){t.push("feed2json: "+(e.message||e))}try{await p(400);const t=await async function(e){const t="https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(e.rss),n=new AbortController,r=setTimeout((()=>n.abort()),18e3);try{const s=await fetch(t,{signal:n.signal});if(clearTimeout(r),!s.ok)throw new Error("rss2json HTTP "+s.status);const o=await s.json();if("ok"!==o.status)throw new Error(o.message||"rss2json error");return(o.items||[]).map((t=>v(t,e.name))).filter(Boolean).slice(0,12)}catch(e){throw clearTimeout(r),e}}(e);return r[e.name]={ok:!0,count:t.length,error:null,via:"rss2json"},t}catch(e){t.push("rss2json: "+(e.message||e))}return r[e.name]={ok:!1,count:0,error:t.join(" | ")},[]}async function S(a){if(o.style.display="none",!a){const s=function(){try{const e=localStorage.getItem(t);if(!e)return null;const n=JSON.parse(e);return n&&n.ts&&Array.isArray(n.items)?Date.now()-n.ts>18e5?null:n:null}catch(e){return null}}();if(s&&s.items.length){n=s.items,r=s.stats||{};const t=Math.round((Date.now()-s.ts)/6e4),o=Object.values(r).filter((e=>e&&e.ok)).length;return u.textContent="Cached · "+t+" min ago",m.textContent=o+"/"+e.length+" sources (cache) · click Refresh for live",E(),void D()}}m.textContent="Fetching sources (parallel)…",u.textContent="Loading…",s.innerHTML='<div style="padding:2rem;text-align:center;color:var(--text-muted)">Loading live feeds…</div>',r={};let i=0;const c=await async function(e,t,n){const r=new Array(e.length);let s=0;async function o(){for(;s<e.length;){const t=s++;r[t]=await n(e[t],t)}}const a=[];for(let n=0;n<Math.min(t,e.length);n++)a.push(o());return await Promise.all(a),r}(e,3,(async t=>{const n=await b(t);i++;const s=Object.values(r).filter((e=>e&&e.ok)).length;return m.textContent="Loaded "+i+"/"+e.length+" · "+s+" ok",n}));let l=[].concat(...c);const d=new Set;l=l.filter((e=>{const t=(e.link||e.title).toLowerCase();return!d.has(t)&&(d.add(t),!0)})),l.sort(((e,t)=>new Date(t.date)-new Date(e.date))),n=l.slice(0,120),function(e,n){try{localStorage.setItem(t,JSON.stringify({ts:Date.now(),items:e,stats:n}))}catch(e){}}(n,r);const h=Object.values(r).filter((e=>e.ok)).length,p=e.length-h;u.textContent="Updated: "+(new Date).toLocaleString(void 0,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit"}),m.textContent=h+"/"+e.length+" sources loaded"+(p?" · "+p+" failed":" · all sources OK"),E(),D()}function E(){c.innerHTML='<option value="">All sources</option>',e.forEach((e=>{const t=document.createElement("option");t.value=e.name;const n=r[e.name];t.textContent=e.name+(n&&n.ok?" ("+n.count+")":n?" (failed)":""),c.appendChild(t)})),h&&(h.innerHTML=e.map((e=>{const t=r[e.name]||{},n=t.ok?t.count:"—",s=t.ok?t.count+" via "+(t.via||"?"):t.error||"failed";return`<div class="source-item" data-source="${e.name}" title="${s}">\n          <a href="${e.home}" target="_blank" rel="noopener noreferrer" class="source-name">${e.name}</a>\n          <span class="source-count">${n}</span>\n        </div>`})).join(""),h.querySelectorAll(".source-item").forEach((e=>{e.style.cursor="pointer",e.addEventListener("click",(t=>{if("A"===t.target.tagName)return;const n=e.dataset.source;c.value=c.value===n?"":n,D()}))})))}function C(e){if(s.innerHTML="",!e.length)return o.style.display="block",void(a.textContent="0 items");o.style.display="none",a.textContent=e.length+" item"+(1!==e.length?"s":"");let t="";e.forEach((e=>{const n=function(e){try{const t=new Date(e),n=new Date,r=new Date;return r.setDate(n.getDate()-1),t.toDateString()===n.toDateString()?"Today":t.toDateString()===r.toDateString()?"Yesterday":t.toLocaleDateString(void 0,{year:"numeric",month:"short",day:"numeric"})}catch(e){return""}}(e.date);if(n!==t){const e=document.createElement("div");e.className="date-group",e.innerHTML=`<span class="date-label">${n}</span><span class="date-line"></span>`,s.appendChild(e),t=n}const r=document.createElement("div");r.className="intel-card",r.tabIndex=0,r.setAttribute("role","link"),r.setAttribute("aria-label",e.title);let o="";e.sev&&(o+=`<span class="intel-badge ${e.sev}">${e.sev}</span>`),e.cve&&(o+=`<span class="intel-badge cve">${e.cve}</span>`),w(e.date)&&(o+='<span class="intel-badge new">NEW</span>'),r.innerHTML=`\n          <div class="intel-card-header">\n            <span class="intel-source">${e.source}</span>\n            <span class="intel-date">${function(e){try{const t=new Date(e);return isNaN(t)?"":t.toLocaleString(void 0,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"})}catch(e){return""}}(e.date)}</span>\n            ${o}\n          </div>\n          <div class="intel-title">${e.title}</div>\n          <a href="${e.link}" target="_blank" rel="noopener noreferrer" class="intel-open" onclick="event.stopPropagation()">Open article ↗</a>\n        `,r.addEventListener("click",(t=>{t.target.closest("a")||window.open(e.link,"_blank","noopener")})),r.addEventListener("keydown",(t=>{"Enter"===t.key&&window.open(e.link,"_blank","noopener")})),s.appendChild(r)}))}function D(){const e=(i.value||"").trim().toLowerCase(),t=c.value,r=[...l].filter((e=>e.classList.contains("active"))).map((e=>e.dataset.sev));C(n.filter((n=>{const s=(n.title+" "+n.source+" "+(n.cve||"")).toLowerCase();if(e&&!s.includes(e))return!1;if(t&&n.source!==t)return!1;if(r.length){const e=r.includes(n.sev),t=r.includes("new")&&w(n.date);if(!e&&!t)return!1}return!0})))}i.addEventListener("input",D),c.addEventListener("change",D),l.forEach((e=>e.addEventListener("click",(()=>{e.classList.toggle("active"),D()})))),d&&d.addEventListener("click",(()=>{try{localStorage.removeItem(t)}catch(e){}S(!0)})),S(!1)}()</script></body></html>
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Threat Intelligence Feed — CyberVault | Live Cyber News &amp; CVE Alerts</title><meta name="description" content="Live threat intelligence feed aggregating cybersecurity news, vulnerability alerts, ransomware activity, and APT reports. Updated regularly from trusted sources."><meta name="keywords" content="threat intelligence, cyber feed, CVE alerts, ransomware, APT, CISA KEV, cybersecurity news, vulnerability intelligence"><meta name="author" content="v!R_3pH0$"><meta name="robots" content="index, follow"><link rel="canonical" href="https://v1r-3ph0s.github.io/intel.html"><meta property="og:type" content="website"><meta property="og:site_name" content="CyberVault"><meta property="og:title" content="Threat Intelligence Feed — CyberVault"><meta property="og:description" content="Live threat intelligence feed: cybersecurity news, CVE alerts, ransomware, and APT activity."><meta property="og:url" content="https://v1r-3ph0s.github.io/intel.html"><meta property="og:image" content="https://v1r-3ph0s.github.io/assets/img/avatar.svg"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@54N92N"><meta name="twitter:title" content="Threat Intelligence Feed — CyberVault"><meta name="twitter:description" content="Live threat intelligence feed: cybersecurity news, CVE alerts, ransomware, and APT activity."><meta name="twitter:image" content="https://v1r-3ph0s.github.io/assets/img/avatar.svg"><link rel="alternate" type="application/rss+xml" title="CyberVault RSS Feed" href="https://v1r-3ph0s.github.io/feed.xml"><link rel="icon" type="image/svg+xml" href="assets/img/avatar.svg"><link rel="stylesheet" href="assets/css/main.css"><link rel="stylesheet" href="assets/css/syntax.css"><link rel="stylesheet" href="assets/css/responsive.css"><script src="assets/js/app.min.js" defer></script><style>
+/* Intel Feed page styles — matches CyberVault tokens */
+.intel-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 1rem;
+margin-bottom: 1.5rem;
+}
+.intel-live {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+font-size: 0.75rem;
+font-weight: 600;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+color: var(--accent);
+background: var(--accent-glow);
+border: 1px solid rgba(0,255,136,0.25);
+padding: 0.25rem 0.65rem;
+border-radius: 99px;
+}
+.intel-live::before {
+content: "";
+width: 7px; height: 7px;
+border-radius: 50%;
+background: var(--accent);
+box-shadow: 0 0 6px var(--accent);
+animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.5; transform: scale(0.85); }
+}
+.intel-meta {
+font-size: 0.8rem;
+color: var(--text-muted);
+font-family: var(--font-mono);
+}
+.intel-controls {
+display: flex;
+flex-wrap: wrap;
+gap: 0.6rem;
+margin-bottom: 1.25rem;
+align-items: center;
+}
+.intel-search {
+flex: 1;
+min-width: 180px;
+position: relative;
+}
+.intel-search input {
+width: 100%;
+background: var(--bg-secondary);
+border: 1px solid var(--border);
+border-radius: var(--radius);
+color: var(--text-primary);
+font-family: var(--font-sans);
+font-size: 0.875rem;
+padding: 0.5rem 0.75rem 0.5rem 2.1rem;
+outline: none;
+transition: border-color var(--transition);
+}
+.intel-search input:focus {
+border-color: var(--accent);
+}
+.intel-search input::placeholder { color: var(--text-muted); }
+.intel-search .search-ico {
+position: absolute;
+left: 0.65rem;
+top: 50%;
+transform: translateY(-50%);
+color: var(--text-muted);
+font-size: 0.9rem;
+pointer-events: none;
+}
+.intel-select {
+background: var(--bg-secondary);
+border: 1px solid var(--border);
+border-radius: var(--radius);
+color: var(--text-primary);
+font-family: var(--font-sans);
+font-size: 0.85rem;
+padding: 0.5rem 0.7rem;
+outline: none;
+cursor: pointer;
+}
+.intel-select:focus { border-color: var(--accent); }
+.sev-pills {
+display: flex;
+flex-wrap: wrap;
+gap: 0.4rem;
+}
+.sev-pill {
+font-size: 0.7rem;
+font-weight: 600;
+letter-spacing: 0.3px;
+text-transform: uppercase;
+padding: 0.25rem 0.55rem;
+border-radius: 99px;
+border: 1px solid var(--border);
+background: var(--bg-secondary);
+color: var(--text-secondary);
+cursor: pointer;
+transition: all var(--transition);
+user-select: none;
+}
+.sev-pill:hover { border-color: var(--text-muted); }
+.sev-pill.active {
+border-color: var(--accent);
+background: var(--accent-glow);
+color: var(--accent);
+}
+.sev-pill[data-sev="critical"].active { border-color: var(--danger); background: rgba(255,77,77,0.12); color: var(--danger); }
+.sev-pill[data-sev="high"].active { border-color: var(--warning); background: rgba(227,179,65,0.12); color: var(--warning); }
+.sev-pill[data-sev="medium"].active { border-color: #58a6ff; background: rgba(88,166,255,0.12); color: #58a6ff; }
+.intel-list {
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+}
+.intel-card {
+background: var(--card-bg);
+border: 1px solid var(--border);
+border-radius: var(--radius-lg);
+padding: 1rem 1.15rem;
+transition: border-color var(--transition), box-shadow var(--transition);
+cursor: pointer;
+}
+.intel-card:hover {
+border-color: var(--accent);
+box-shadow: 0 0 0 1px var(--accent-glow);
+}
+.intel-card-header {
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+gap: 0.5rem 0.75rem;
+margin-bottom: 0.45rem;
+}
+.intel-source {
+font-size: 0.72rem;
+font-weight: 600;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 0.4px;
+}
+.intel-date {
+font-size: 0.72rem;
+color: var(--text-muted);
+font-family: var(--font-mono);
+}
+.intel-badge {
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.4px;
+text-transform: uppercase;
+padding: 0.15rem 0.45rem;
+border-radius: 4px;
+}
+.intel-badge.critical { background: rgba(255,77,77,0.15); color: var(--danger); border: 1px solid rgba(255,77,77,0.3); }
+.intel-badge.high { background: rgba(227,179,65,0.15); color: var(--warning); border: 1px solid rgba(227,179,65,0.3); }
+.intel-badge.medium { background: rgba(88,166,255,0.12); color: #58a6ff; border: 1px solid rgba(88,166,255,0.3); }
+.intel-badge.new {
+background: var(--accent-glow);
+color: var(--accent);
+border: 1px solid rgba(0,255,136,0.3);
+}
+.intel-badge.cve {
+background: rgba(192,132,252,0.12);
+color: #c084fc;
+border: 1px solid rgba(192,132,252,0.3);
+font-family: var(--font-mono);
+}
+.intel-title {
+font-size: 0.95rem;
+font-weight: 600;
+color: var(--text-primary);
+line-height: 1.45;
+margin-bottom: 0.5rem;
+}
+.intel-card:hover .intel-title { color: var(--accent); }
+.intel-open {
+display: inline-flex;
+align-items: center;
+gap: 0.3rem;
+font-size: 0.78rem;
+color: var(--link);
+font-weight: 500;
+}
+.intel-open:hover { color: var(--link-hover); }
+.intel-empty {
+text-align: center;
+padding: 3rem 1rem;
+color: var(--text-muted);
+font-size: 0.9rem;
+display: none;
+}
+.intel-count {
+font-size: 0.8rem;
+color: var(--text-muted);
+margin-bottom: 0.75rem;
+}
+.date-group {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+margin: 1.25rem 0 0.5rem;
+}
+.date-group:first-child { margin-top: 0; }
+.date-label {
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 0.8px;
+text-transform: uppercase;
+color: var(--text-muted);
+white-space: nowrap;
+}
+.date-line {
+flex: 1;
+height: 1px;
+background: var(--border);
+}
+/* Source list in aside */
+.source-list { display: flex; flex-direction: column; gap: 0.35rem; }
+.source-item {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 0.5rem;
+font-size: 0.82rem;
+color: var(--text-secondary);
+padding: 0.3rem 0;
+border-bottom: 1px solid var(--border-muted);
+}
+.source-item:last-child { border-bottom: none; }
+.source-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.source-count {
+font-size: 0.72rem;
+font-family: var(--font-mono);
+color: var(--text-muted);
+background: var(--bg-tertiary);
+padding: 0.1rem 0.4rem;
+border-radius: 4px;
+flex-shrink: 0;
+}
+.source-item a { color: var(--link); }
+.source-item a:hover { color: var(--link-hover); }
+@media (max-width: 768px) {
+.intel-controls { flex-direction: column; align-items: stretch; }
+.intel-search { min-width: 100%; }
+}
+</style></head><body class="intel-page"><div id="app-loader" aria-live="polite" aria-busy="true"><div class="app-loader-brand">CyberVault</div><div class="app-loader-spinner" aria-hidden="true"></div><div class="app-loader-text">Initializing…</div></div><a href="#main-content" class="skip-link">Skip to content</a><div id="app"><div class="sidebar-overlay" id="sidebarOverlay"></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><div class="profile" id="sidebarProfile"></div><div class="sidebar-divider"></div><nav class="sidebar-nav" id="sidebarNav"></nav><div class="sidebar-divider"></div><div class="sidebar-stats" id="sidebarStats"></div><div class="sidebar-divider"></div><div class="social-links" id="sidebarSocial"></div></div></aside><div class="main-wrapper"><header class="topbar"><button class="menu-toggle" id="menuToggle" aria-label="Toggle sidebar" aria-expanded="false">&#9776;</button><span class="topbar-brand" id="topbarBrand"></span><div class="search-wrap" role="search"><div class="search-input-wrap"><span class="search-icon">&#128269;</span><input type="search" id="searchInput" placeholder="Search posts… (press /)" autocomplete="off" aria-label="Search posts"></div><div class="search-results" id="searchResults" role="listbox"></div></div><div class="topbar-actions"><button class="theme-toggle" id="themeToggle">&#9728;</button></div></header><main class="content-wrapper" id="main-content"><div class="content-main"><div class="section-header"><h2 class="section-title"><span class="title-accent">//</span> Threat Intel Feed</h2><p class="section-subtitle">Aggregated cybersecurity news, vulnerability alerts &amp; threat reports</p></div><div class="intel-header"><div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap"><span class="intel-live" id="intelLiveBadge">Live</span><span class="intel-meta" id="intelUpdated">Loading feeds…</span></div><div style="display:flex;align-items:center;gap:0.75rem"><span class="intel-count" id="intelCount">—</span><button type="button" class="intel-select" id="intelRefresh" style="cursor:pointer;padding:0.4rem 0.7rem" title="Refresh feeds">↻ Refresh</button></div></div><div id="intelStatus" style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;min-height:1.2em"></div><div class="intel-controls"><div class="intel-search"><span class="search-ico">&#128269;</span><input type="search" id="intelQ" placeholder="Filter by keyword, CVE, source…" autocomplete="off" aria-label="Filter intel items"></div><select class="intel-select" id="intelSrc" aria-label="Filter by source"><option value="">All sources</option></select><div class="sev-pills" id="sevPills"><span class="sev-pill" data-sev="critical">Critical</span><span class="sev-pill" data-sev="high">High</span><span class="sev-pill" data-sev="medium">Medium</span><span class="sev-pill" data-sev="new">New</span></div></div><div class="intel-list" id="intelList"></div><div class="intel-empty" id="intelEmpty">No items match your filters.</div></div><aside class="content-aside"><div class="widget"><div class="widget-title">📡 Sources</div><p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;line-height:1.5">
+Articles are aggregated from these public cybersecurity news outlets.
+</p><div class="source-list" id="intelSources"></div></div><div class="widget"><div class="widget-title">&#128337; Recent Posts</div><div id="recentPostsWidget"></div></div><div class="widget"><div class="widget-title">⬡ Quick Links</div><div style="display:flex;flex-direction:column;gap:0.5rem"><a href="index.html" class="read-more">&#8594; All Posts</a><a href="categories.html" class="read-more">&#8594; Categories</a><a href="tags.html" class="read-more">&#8594; Tags</a><a href="archives.html" class="read-more">&#8594; Archives</a></div></div></aside></main><footer class="site-footer" id="siteFooter"></footer></div></div><button class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</button><script>
+(function () {
+/* ============================================================
+Pure client-side intel feed (HTML + JS only)
+Primary: proxy.cors.dev → raw RSS/Atom → DOMParser
+Fallback: feed2json.org, then rss2json.com
+Parallel (3 at a time) so rate limits don't kill the rest
+============================================================ */
+const FEEDS = [
+{ name: 'BleepingComputer',    home: 'https://www.bleepingcomputer.com/',    rss: 'https://www.bleepingcomputer.com/feed/' },
+{ name: 'The Hacker News',     home: 'https://thehackernews.com/',           rss: 'https://feeds.feedburner.com/TheHackersNews' },
+{ name: 'SecurityWeek',        home: 'https://www.securityweek.com/',        rss: 'https://www.securityweek.com/feed/' },
+{ name: 'Security Affairs',    home: 'https://securityaffairs.com/',         rss: 'https://securityaffairs.com/feed' },
+{ name: 'GBHackers',           home: 'https://gbhackers.com/',               rss: 'https://gbhackers.com/feed/' },
+{ name: 'Cyber Security News', home: 'https://cybersecuritynews.com/',       rss: 'https://cybersecuritynews.com/feed/' },
+{ name: 'Dark Reading',        home: 'https://www.darkreading.com/',         rss: 'https://www.darkreading.com/rss.xml' },
+{ name: 'Krebs on Security',   home: 'https://krebsonsecurity.com/',         rss: 'https://krebsonsecurity.com/feed/' },
+{ name: 'CISA Advisories',     home: 'https://www.cisa.gov/',                rss: 'https://www.cisa.gov/cybersecurity-advisories/all.xml' },
+{ name: 'SANS ISC',            home: 'https://isc.sans.edu/',                rss: 'https://isc.sans.edu/rssfeed_full.xml' },
+{ name: 'Unit 42',             home: 'https://unit42.paloaltonetworks.com/', rss: 'https://unit42.paloaltonetworks.com/feed/' },
+{ name: 'Microsoft Security',  home: 'https://www.microsoft.com/en-us/security/blog/', rss: 'https://www.microsoft.com/en-us/security/blog/feed/' }
+];
+const PER_FEED = 12;
+const MAX_ITEMS = 120;
+const CONCURRENCY = 3;
+const CACHE_KEY = 'cv_intel_corsdev_v1';
+const CACHE_TTL_MS = 30 * 60 * 1000;
+let ITEMS = [];
+let feedStats = {};
+const listEl     = document.getElementById('intelList');
+const emptyEl    = document.getElementById('intelEmpty');
+const countEl    = document.getElementById('intelCount');
+const qEl        = document.getElementById('intelQ');
+const srcEl      = document.getElementById('intelSrc');
+const pills      = document.querySelectorAll('.sev-pill');
+const updatedEl  = document.getElementById('intelUpdated');
+const statusEl   = document.getElementById('intelStatus');
+const refreshBtn = document.getElementById('intelRefresh');
+const sourcesEl  = document.getElementById('intelSources');
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function fmtDate(iso) {
+try {
+const d = new Date(iso);
+if (isNaN(d)) return '';
+return d.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+} catch (_) { return ''; }
+}
+function dayLabel(iso) {
+try {
+const d = new Date(iso);
+const t = new Date(), y = new Date(); y.setDate(t.getDate() - 1);
+if (d.toDateString() === t.toDateString()) return 'Today';
+if (d.toDateString() === y.toDateString()) return 'Yesterday';
+return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+} catch (_) { return ''; }
+}
+function isNew(iso) {
+try { return (Date.now() - new Date(iso).getTime()) < 36 * 3600 * 1000; }
+catch (_) { return false; }
+}
+function extractCve(text) {
+const m = (text || '').match(/CVE-\d{4}-\d{4,7}/i);
+return m ? m[0].toUpperCase() : '';
+}
+function extractSev(text) {
+const t = (text || '').toLowerCase();
+if (/\bcritical\b|zero-?day|0-day|rce\b|remote code execution|actively exploited|\bkev\b/.test(t)) return 'critical';
+if (/\bhigh\b|ransomware|worm|wiper/.test(t)) return 'high';
+if (/\bmedium\b|moderate\b/.test(t)) return 'medium';
+return '';
+}
+function textOf(el) {
+return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : '';
+}
+function parseXmlFeed(xmlText, sourceName) {
+const items = [];
+const doc = new DOMParser().parseFromString(xmlText, 'application/xml');
+if (doc.querySelector('parsererror')) throw new Error('XML parse error');
+let nodes = doc.querySelectorAll('item');
+if (!nodes.length) nodes = doc.querySelectorAll('entry');
+nodes.forEach(node => {
+if (items.length >= PER_FEED) return;
+const title = textOf(node.querySelector('title'));
+if (!title) return;
+let link = '';
+const linkEl = node.querySelector('link');
+if (linkEl) {
+link = linkEl.getAttribute('href') || textOf(linkEl);
+}
+if (!link) {
+const guid = node.querySelector('guid');
+if (guid) {
+const g = textOf(guid);
+if (g.startsWith('http')) link = g;
+}
+}
+if (!link) return;
+const dateStr =
+textOf(node.querySelector('pubDate')) ||
+textOf(node.querySelector('published')) ||
+textOf(node.querySelector('updated')) || '';
+let date = dateStr ? new Date(dateStr) : new Date();
+if (isNaN(date.getTime())) date = new Date();
+const desc =
+textOf(node.querySelector('description')) ||
+textOf(node.querySelector('summary')) ||
+textOf(node.querySelector('content')) || '';
+const combined = title + ' ' + desc;
+items.push({
+title,
+source: sourceName,
+date: date.toISOString(),
+link: link.trim(),
+sev: extractSev(combined),
+cve: extractCve(combined)
+});
+});
+return items;
+}
+function normalizeJsonItem(raw, sourceName) {
+const title = (raw.title || '').replace(/\s+/g, ' ').trim();
+const link = (raw.url || raw.link || raw.guid || raw.id || '').trim();
+if (!title || !link) return null;
+let date = new Date(raw.date_published || raw.pubDate || raw.published || raw.date || Date.now());
+if (isNaN(date.getTime())) date = new Date();
+const combined = title + ' ' + (raw.summary || raw.description || raw.content_html || '');
+return {
+title,
+source: sourceName,
+date: date.toISOString(),
+link,
+sev: extractSev(combined),
+cve: extractCve(combined)
+};
+}
+async function fetchViaCorsDev(feed) {
+const url = 'https://proxy.cors.dev/' + feed.rss;
+const controller = new AbortController();
+const timer = setTimeout(() => controller.abort(), 25000);
+try {
+const res = await fetch(url, {
+signal: controller.signal,
+headers: { 'Accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*' }
+});
+clearTimeout(timer);
+if (!res.ok) throw new Error('cors.dev HTTP ' + res.status);
+const text = await res.text();
+if (!text || text.length < 50) throw new Error('empty response');
+return parseXmlFeed(text, feed.name);
+} catch (e) {
+clearTimeout(timer);
+throw e;
+}
+}
+async function fetchViaFeed2Json(feed) {
+const url = 'https://feed2json.org/convert?url=' + encodeURIComponent(feed.rss);
+const controller = new AbortController();
+const timer = setTimeout(() => controller.abort(), 20000);
+try {
+const res = await fetch(url, { signal: controller.signal });
+clearTimeout(timer);
+if (!res.ok) throw new Error('feed2json HTTP ' + res.status);
+const data = await res.json();
+const rawItems = data.items || [];
+return rawItems.map(r => normalizeJsonItem(r, feed.name)).filter(Boolean).slice(0, PER_FEED);
+} catch (e) {
+clearTimeout(timer);
+throw e;
+}
+}
+async function fetchViaRss2Json(feed) {
+const url = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.rss);
+const controller = new AbortController();
+const timer = setTimeout(() => controller.abort(), 18000);
+try {
+const res = await fetch(url, { signal: controller.signal });
+clearTimeout(timer);
+if (!res.ok) throw new Error('rss2json HTTP ' + res.status);
+const data = await res.json();
+if (data.status !== 'ok') throw new Error(data.message || 'rss2json error');
+return (data.items || []).map(r => normalizeJsonItem(r, feed.name)).filter(Boolean).slice(0, PER_FEED);
+} catch (e) {
+clearTimeout(timer);
+throw e;
+}
+}
+async function fetchOne(feed) {
+const errors = [];
+// 1) cors.dev (best for most feeds)
+try {
+const items = await fetchViaCorsDev(feed);
+feedStats[feed.name] = { ok: true, count: items.length, error: null, via: 'cors.dev' };
+return items;
+} catch (e) { errors.push('cors.dev: ' + (e.message || e)); }
+// 2) feed2json
+try {
+await sleep(300);
+const items = await fetchViaFeed2Json(feed);
+if (items.length) {
+feedStats[feed.name] = { ok: true, count: items.length, error: null, via: 'feed2json' };
+return items;
+}
+errors.push('feed2json: 0 items');
+} catch (e) { errors.push('feed2json: ' + (e.message || e)); }
+// 3) rss2json
+try {
+await sleep(400);
+const items = await fetchViaRss2Json(feed);
+feedStats[feed.name] = { ok: true, count: items.length, error: null, via: 'rss2json' };
+return items;
+} catch (e) { errors.push('rss2json: ' + (e.message || e)); }
+feedStats[feed.name] = { ok: false, count: 0, error: errors.join(' | ') };
+return [];
+}
+async function mapPool(list, limit, worker) {
+const results = new Array(list.length);
+let i = 0;
+async function run() {
+while (i < list.length) {
+const idx = i++;
+results[idx] = await worker(list[idx], idx);
+}
+}
+const runners = [];
+for (let k = 0; k < Math.min(limit, list.length); k++) runners.push(run());
+await Promise.all(runners);
+return results;
+}
+function readCache() {
+try {
+const raw = localStorage.getItem(CACHE_KEY);
+if (!raw) return null;
+const obj = JSON.parse(raw);
+if (!obj || !obj.ts || !Array.isArray(obj.items)) return null;
+if (Date.now() - obj.ts > CACHE_TTL_MS) return null;
+return obj;
+} catch (_) { return null; }
+}
+function writeCache(items, stats) {
+try {
+localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), items, stats }));
+} catch (_) {}
+}
+async function loadFeeds(force) {
+emptyEl.style.display = 'none';
+if (!force) {
+const cached = readCache();
+if (cached && cached.items.length) {
+ITEMS = cached.items;
+feedStats = cached.stats || {};
+const age = Math.round((Date.now() - cached.ts) / 60000);
+const ok = Object.values(feedStats).filter(s => s && s.ok).length;
+updatedEl.textContent = 'Cached · ' + age + ' min ago';
+statusEl.textContent = ok + '/' + FEEDS.length + ' sources (cache) · click Refresh for live';
+populateSourcesUI();
+apply();
+return;
+}
+}
+statusEl.textContent = 'Fetching sources (parallel)…';
+updatedEl.textContent = 'Loading…';
+listEl.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-muted)">Loading live feeds…</div>';
+feedStats = {};
+let done = 0;
+const results = await mapPool(FEEDS, CONCURRENCY, async (feed) => {
+const items = await fetchOne(feed);
+done++;
+const ok = Object.values(feedStats).filter(s => s && s.ok).length;
+statusEl.textContent = 'Loaded ' + done + '/' + FEEDS.length + ' · ' + ok + ' ok';
+return items;
+});
+let merged = [].concat(...results);
+const seen = new Set();
+merged = merged.filter(it => {
+const k = (it.link || it.title).toLowerCase();
+if (seen.has(k)) return false;
+seen.add(k);
+return true;
+});
+merged.sort((a, b) => new Date(b.date) - new Date(a.date));
+ITEMS = merged.slice(0, MAX_ITEMS);
+writeCache(ITEMS, feedStats);
+const ok = Object.values(feedStats).filter(s => s.ok).length;
+const fail = FEEDS.length - ok;
+updatedEl.textContent = 'Updated: ' + new Date().toLocaleString(undefined, {
+month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
+});
+statusEl.textContent = ok + '/' + FEEDS.length + ' sources loaded' +
+(fail ? ' · ' + fail + ' failed' : ' · all sources OK');
+populateSourcesUI();
+apply();
+}
+function populateSourcesUI() {
+srcEl.innerHTML = '<option value="">All sources</option>';
+FEEDS.forEach(f => {
+const opt = document.createElement('option');
+opt.value = f.name;
+const st = feedStats[f.name];
+opt.textContent = f.name + (st && st.ok ? ' (' + st.count + ')' : st ? ' (failed)' : '');
+srcEl.appendChild(opt);
+});
+if (!sourcesEl) return;
+sourcesEl.innerHTML = FEEDS.map(f => {
+const st = feedStats[f.name] || {};
+const countLabel = st.ok ? st.count : '—';
+const tip = st.ok ? (st.count + ' via ' + (st.via || '?')) : (st.error || 'failed');
+return `<div class="source-item" data-source="${f.name}" title="${tip}"><a href="${f.home}" target="_blank" rel="noopener noreferrer" class="source-name">${f.name}</a><span class="source-count">${countLabel}</span></div>`;
+}).join('');
+sourcesEl.querySelectorAll('.source-item').forEach(el => {
+el.style.cursor = 'pointer';
+el.addEventListener('click', e => {
+if (e.target.tagName === 'A') return;
+const s = el.dataset.source;
+srcEl.value = (srcEl.value === s) ? '' : s;
+apply();
+});
+});
+}
+function render(items) {
+listEl.innerHTML = '';
+if (!items.length) {
+emptyEl.style.display = 'block';
+countEl.textContent = '0 items';
+return;
+}
+emptyEl.style.display = 'none';
+countEl.textContent = items.length + ' item' + (items.length !== 1 ? 's' : '');
+let lastDay = '';
+items.forEach(item => {
+const day = dayLabel(item.date);
+if (day !== lastDay) {
+const g = document.createElement('div');
+g.className = 'date-group';
+g.innerHTML = `<span class="date-label">${day}</span><span class="date-line"></span>`;
+listEl.appendChild(g);
+lastDay = day;
+}
+const card = document.createElement('div');
+card.className = 'intel-card';
+card.tabIndex = 0;
+card.setAttribute('role', 'link');
+card.setAttribute('aria-label', item.title);
+let badges = '';
+if (item.sev) badges += `<span class="intel-badge ${item.sev}">${item.sev}</span>`;
+if (item.cve) badges += `<span class="intel-badge cve">${item.cve}</span>`;
+if (isNew(item.date)) badges += `<span class="intel-badge new">NEW</span>`;
+card.innerHTML = `
+<div class="intel-card-header"><span class="intel-source">${item.source}</span><span class="intel-date">${fmtDate(item.date)}</span>
+${badges}
+</div><div class="intel-title">${item.title}</div><a href="${item.link}" target="_blank" rel="noopener noreferrer" class="intel-open" onclick="event.stopPropagation()">Open article ↗</a>
+`;
+card.addEventListener('click', e => {
+if (e.target.closest('a')) return;
+window.open(item.link, '_blank', 'noopener');
+});
+card.addEventListener('keydown', e => {
+if (e.key === 'Enter') window.open(item.link, '_blank', 'noopener');
+});
+listEl.appendChild(card);
+});
+}
+function apply() {
+const q = (qEl.value || '').trim().toLowerCase();
+const src = srcEl.value;
+const activeSev = [...pills].filter(p => p.classList.contains('active')).map(p => p.dataset.sev);
+const filtered = ITEMS.filter(item => {
+const text = (item.title + ' ' + item.source + ' ' + (item.cve || '')).toLowerCase();
+if (q && !text.includes(q)) return false;
+if (src && item.source !== src) return false;
+if (activeSev.length) {
+const matchSev = activeSev.includes(item.sev);
+const matchNew = activeSev.includes('new') && isNew(item.date);
+if (!matchSev && !matchNew) return false;
+}
+return true;
+});
+render(filtered);
+}
+qEl.addEventListener('input', apply);
+srcEl.addEventListener('change', apply);
+pills.forEach(p => p.addEventListener('click', () => { p.classList.toggle('active'); apply(); }));
+if (refreshBtn) {
+refreshBtn.addEventListener('click', () => {
+try { localStorage.removeItem(CACHE_KEY); } catch (_) {}
+loadFeeds(true);
+});
+}
+loadFeeds(false);
+})();
+</script></body></html>
